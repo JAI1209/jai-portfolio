@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Jai Prakash — Portfolio
 
 > Dark editorial brutalism meets Japanese minimalism.
@@ -50,3 +51,6 @@ src/
 ├── main.jsx
 └── index.css
 ```
+=======
+# jai-portfolio
+>>>>>>> 1a85324aacd443ef09ad7865a230538702fec512
