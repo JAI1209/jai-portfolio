@@ -6,7 +6,7 @@ export const personal = {
   fullName: "Jai Surya Kumar",
   handle: "@jai_dev",
   tagline: "I build things that work. Sometimes I break things first.",
-  photo: "/src/assets/0101.png", // ← drop your photo here
+  photo: "/src/public/0101.png", // ← drop your photo here
   email: "rajsuriya51@gmail.com",
   linkedin: "https://www.linkedin.com/in/jai1209/",
   github: "https://github.com/JAI1209",
@@ -141,13 +141,13 @@ export const education = [
 ];
 
 export const certifications = [
-  { name: "100 Days of Code: The Complete Python Pro Bootcamp", issuer: "Udemy", year: "2023", link: "/src/assets/python.png" },
-  { name: "The Complete 2023 Web Development Bootcamp", issuer: "Udemy", year: "2023", link: "/src/assets/Bootcamp1.png" },
-  { name: "Data Structures & Algorithms — Part 1", issuer: "Internshala", year: "2026", link: "/src/assets/DSA1.png" },
-  { name: "Data Structures & Algorithms — Part 2", issuer: "Internshala", year: "2026", link: "/src/assets/DSA2.png" },
-  { name: "Git & GitHub", issuer: "Internshala", year: "2026", link: "/src/assets/git-github.png" },
-  { name: "HTML & CSS", issuer: "Internshala", year: "2026", link: "/src/assets/html&css.png" },
-  { name: "JavaScript", issuer: "Internshala", year: "2026", link: "/src/assets/javascript.png" },
+  { name: "100 Days of Code: The Complete Python Pro Bootcamp", issuer: "Udemy", year: "2023", link: "/src/public/python.png" },
+  { name: "The Complete 2023 Web Development Bootcamp", issuer: "Udemy", year: "2023", link: "/src/public/Bootcamp1.png" },
+  { name: "Data Structures & Algorithms — Part 1", issuer: "Internshala", year: "2026", link: "/src/public/DSA1.png" },
+  { name: "Data Structures & Algorithms — Part 2", issuer: "Internshala", year: "2026", link: "/src/public/DSA2.png" },
+  { name: "Git & GitHub", issuer: "Internshala", year: "2026", link: "/src/public/git-github.png" },
+  { name: "HTML & CSS", issuer: "Internshala", year: "2026", link: "/src/public/html&css.png" },
+  { name: "JavaScript", issuer: "Internshala", year: "2026", link: "/src/public/javascript.png" },
 ];
 export const blogs = [
   {
