@@ -1,21 +1,21 @@
 /* src/index.css */
 /* ── DESIGN SYSTEM ─────────────────────────────── */
 :root {
-  --bg: #18230F;
-  --bg2:  #18230F;
-  --bg3: #18230F;
-  --surface:  #18230F;
-  --surface2: #18230F;
-  --border: #2C3930;
-  --border-hover: #2C3930;
+  --bg: #111111;
+  --bg2: #1C1C1C;
+  --bg3: #2A1A1A;
+  --surface: #181818;
+  --surface2: #201818;
+  --border: #2A2A2A;
+  --border-hover: #3A3A3A;
   --accent: #00FF94;
-  --accent-dim: rgba(0, 255, 148, 0.08);
-  --accent-dim2: rgba(0, 255, 148, 0.15);
+  --accent-dim: rgba(0, 255, 148, 0.05);
+  --accent-dim2: rgba(0, 255, 148, 0.12);
   --accent-glow: 0 0 32px rgba(0, 255, 148, 0.3), 0 0 64px rgba(0, 255, 148, 0.12);
   --accent-glow-sm: 0 0 16px rgba(0, 255, 148, 0.25);
-  --text: #eeebe6;
-  --text-secondary: #777777;
-  --text-muted: #333333;
+  --text: #F7F3F0;
+  --text-secondary: #A8A49F;
+  --text-muted: #5A5653;
   --font-display: 'Syne', sans-serif;
   --font-mono: 'Space Mono', monospace;
   --radius: 3px;
@@ -168,7 +168,7 @@ body::after {
   line-height: 1;
   margin-bottom: 64px;
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, var(--text) 0%, rgba(240,237,232,0.6) 100%);
+  background: linear-gradient(135deg, var(--text) 0%, rgba(240,237,232,0.5) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -194,7 +194,7 @@ body::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%);
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -205,7 +205,6 @@ body::after {
   color: var(--bg);
   border: 1px solid var(--accent);
   font-weight: 700;
-  box-shadow: 0 0 0 0 rgba(0,255,148,0);
 }
 .btn-primary:hover {
   background: transparent;
@@ -338,8 +337,8 @@ nav.navbar.scrolled {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 64px 64px;
   pointer-events: none;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
@@ -352,13 +351,12 @@ nav.navbar.scrolled {
   background: radial-gradient(ellipse 60% 70% at 35% 50%, transparent 20%, var(--bg) 90%);
 }
 
-/* Ambient glow blob */
 .hero-glow {
   position: absolute;
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,255,148,0.04) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,255,148,0.03) 0%, transparent 70%);
   top: 50%;
   left: 55%;
   transform: translate(-50%, -50%);
@@ -449,58 +447,77 @@ nav.navbar.scrolled {
   flex-wrap: wrap;
 }
 
-/* ── PROFILE PHOTO ─────────────────────────────── */
+/* ── PROFILE PHOTO — MINIMAL ANIMATION ─────────── */
+/*
+  Replaced the heavy dual-spinning rings + orbiting dot
+  with a clean minimal approach:
+  — one static thin border ring
+  — a slow breathing glow beneath the photo
+  — a subtle corner-arc that fades in/out
+*/
+
 .hero-photo-wrap {
   position: relative;
   display: flex;
   justify-content: center;
 }
+
 .hero-photo-inner {
   position: relative;
   width: 340px;
   height: 340px;
 }
-.hero-photo-inner::before,
-.hero-photo-inner::after {
+
+/* Breathing glow layer — sits behind the photo */
+.hero-photo-inner::before {
   content: '';
   position: absolute;
+  inset: -16px;
   border-radius: 50%;
-}
-.hero-photo-inner::before {
-  inset: -8px;
-  border: 1.5px solid var(--accent);
-  opacity: 0.6;
-  animation: spin-ring 12s linear infinite;
-  background: conic-gradient(from 0deg, transparent 0%, transparent 60%, rgba(0,255,148,0.15) 80%, transparent 100%);
-}
-.hero-photo-inner::after {
-  inset: -20px;
-  border: 1px solid rgba(0,255,148,0.15);
-  animation: spin-ring 18s linear infinite reverse;
-}
-@keyframes spin-ring {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  background: radial-gradient(circle, rgba(0,255,148,0.08) 0%, transparent 70%);
+  animation: photo-breathe 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
-/* Orbiting dot */
-.hero-photo-orbit {
-  position: absolute;
-  inset: -20px;
-  border-radius: 50%;
-  animation: spin-ring 6s linear infinite;
-}
-.hero-photo-orbit::after {
+/* Static minimal ring */
+.hero-photo-inner::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: -3px;
-  width: 6px;
-  height: 6px;
+  inset: -6px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: var(--accent-glow-sm);
-  transform: translateY(-50%);
+  border: 1px solid rgba(0, 255, 148, 0.22);
+  pointer-events: none;
+}
+
+@keyframes photo-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+/* Corner arc — a single slow-rotating short arc, very subtle */
+.hero-photo-orbit {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: rgba(0, 255, 148, 0.35);
+  border-right-color: rgba(0, 255, 148, 0.08);
+  animation: arc-spin 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Remove the orbiting dot pseudo-element — we just want the arc */
+.hero-photo-orbit::after { display: none; }
+
+@keyframes arc-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 .hero-photo {
@@ -509,10 +526,12 @@ nav.navbar.scrolled {
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
-  filter: grayscale(25%) contrast(1.08);
+  filter: grayscale(20%) contrast(1.06);
   transition: filter 0.5s;
+  position: relative;
+  z-index: 1;
 }
-.hero-photo:hover { filter: grayscale(0%) contrast(1.12) brightness(1.05); }
+.hero-photo:hover { filter: grayscale(0%) contrast(1.1) brightness(1.04); }
 
 .hero-photo-placeholder {
   width: 100%;
@@ -528,6 +547,8 @@ nav.navbar.scrolled {
   font-weight: 800;
   color: var(--accent);
   letter-spacing: -0.05em;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── SCROLL INDICATOR ───────────────────────────── */
@@ -565,12 +586,12 @@ nav.navbar.scrolled {
   animation: scroll-flow 2s ease-in-out infinite;
 }
 @keyframes scroll-flow {
-  0% { top: -100%; }
+  0%   { top: -100%; }
   100% { top: 200%; }
 }
 @keyframes float {
   0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(10px); }
+  50%       { transform: translateX(-50%) translateY(10px); }
 }
 
 /* ── ABOUT ─────────────────────────────────────── */
@@ -587,7 +608,7 @@ nav.navbar.scrolled {
   color: var(--text-secondary);
 }
 .about-bio strong { color: var(--text); font-weight: 700; }
-.about-bio p + p { margin-top: 1.2em; }
+.about-bio p + p  { margin-top: 1.2em; }
 
 .available-badge {
   display: inline-flex;
@@ -618,8 +639,8 @@ nav.navbar.scrolled {
   animation: pulse 2s ease-in-out infinite;
 }
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 8px var(--accent); }
-  50% { transform: scale(1.5); opacity: 0.5; box-shadow: 0 0 16px var(--accent); }
+  0%, 100% { transform: scale(1);   opacity: 1;   box-shadow: 0 0  8px var(--accent); }
+  50%       { transform: scale(1.5); opacity: 0.5; box-shadow: 0 0 16px var(--accent); }
 }
 
 .stats-grid {
@@ -728,7 +749,6 @@ nav.navbar.scrolled {
   transition: var(--transition);
   overflow: hidden;
 }
-/* Top edge accent line */
 .project-card::after {
   content: '';
   position: absolute;
@@ -751,9 +771,9 @@ nav.navbar.scrolled {
 .project-card:hover .bg-gradient { opacity: 1; }
 
 .project-card:hover {
-  border-color: rgba(0,255,148,0.4);
+  border-color: rgba(0,255,148,0.3);
   transform: translateY(-5px) rotate(-0.2deg);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,255,148,0.08);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,255,148,0.06);
 }
 
 .featured-badge {
@@ -814,7 +834,7 @@ nav.navbar.scrolled {
   transition: border-color 0.2s, color 0.2s;
 }
 .project-card:hover .project-tag {
-  border-color: rgba(0,255,148,0.2);
+  border-color: rgba(0,255,148,0.18);
   color: var(--text-secondary);
 }
 .project-links { display: flex; gap: 24px; }
@@ -939,7 +959,7 @@ nav.navbar.scrolled {
 }
 .edu-card:hover::before { width: 100%; }
 .edu-card:hover {
-  border-color: rgba(0,255,148,0.3);
+  border-color: rgba(0,255,148,0.25);
   transform: translateY(-3px);
   background: var(--surface2);
 }
@@ -986,7 +1006,7 @@ nav.navbar.scrolled {
   left: -100%;
   width: 55%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0,255,148,0.04), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0,255,148,0.03), transparent);
   transition: left 0.6s;
 }
 .cert-card:hover::before { left: 160%; }
@@ -1002,7 +1022,7 @@ nav.navbar.scrolled {
 }
 .cert-card:hover::after { width: 100%; }
 .cert-card:hover {
-  border-color: rgba(0,255,148,0.3);
+  border-color: rgba(0,255,148,0.25);
   transform: translateY(-4px);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4);
   background: var(--surface2);
@@ -1074,7 +1094,7 @@ nav.navbar.scrolled {
 }
 .blog-card:hover::before { transform: scaleX(1); }
 .blog-card:hover {
-  border-color: rgba(0,255,148,0.3);
+  border-color: rgba(0,255,148,0.25);
   transform: translateY(-4px);
   background: var(--surface2);
 }
@@ -1165,7 +1185,6 @@ nav.navbar.scrolled {
 .form-field input::placeholder,
 .form-field textarea::placeholder { color: var(--text-muted); }
 
-/* Underline fill animation */
 .form-field::after {
   content: '';
   position: absolute;
@@ -1282,7 +1301,7 @@ nav.navbar.scrolled {
 
 /* ── SELECTION ─────────────────────────────────── */
 ::selection {
-  background: rgba(0,255,148,0.2);
+  background: rgba(0,255,148,0.18);
   color: var(--text);
 }
 
@@ -1326,9 +1345,9 @@ nav.navbar.scrolled {
 
 @media (max-width: 600px) {
   .projects-grid { grid-template-columns: 1fr; }
-  .edu-grid { grid-template-columns: 1fr; }
-  .certs-grid { grid-template-columns: 1fr; }
-  .blog-grid { grid-template-columns: 1fr; }
+  .edu-grid      { grid-template-columns: 1fr; }
+  .certs-grid    { grid-template-columns: 1fr; }
+  .blog-grid     { grid-template-columns: 1fr; }
   .section-title { font-size: 1.9rem; }
   .hero-photo-inner { width: 180px; height: 180px; }
 }
